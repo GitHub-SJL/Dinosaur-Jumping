@@ -6,6 +6,11 @@ canvas.height = window.innerHeight - 100;
 
 ctx.fillStyle = "green";
 
+const img1 = new Image();
+img1.src = "cactus.png";
+const img2 = new Image();
+img2.src = "dinosaur.png";
+
 // 등장 캐릭터의 속성부터 object 자료에 정리
 const dino = {
   x: 10,
@@ -13,8 +18,9 @@ const dino = {
   width: 50,
   height: 50,
   draw() {
-    ctx.fillStyle = "green";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    // ctx.fillStyle = "green";
+    // ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(img2, this.x, this.y, this.width, this.height);
   },
 };
 
@@ -28,12 +34,13 @@ class Cactus {
   constructor() {
     this.x = 500;
     this.y = 200;
-    this.width = 50;
-    this.height = 50;
+    this.width = 30;
+    this.height = 30;
   }
   draw() {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    // ctx.fillStyle = "red";
+    // ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(img1, this.x, this.y, this.width, this.height);
   }
 }
 
