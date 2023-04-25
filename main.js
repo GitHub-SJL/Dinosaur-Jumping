@@ -45,6 +45,7 @@ cactus.draw();
 
 let timer = 0;
 let cacus여러개 = [];
+let 점프timer = 0;
 
 const 프레임마다실행할것 = () => {
   requestAnimationFrame(프레임마다실행할것);
@@ -64,7 +65,7 @@ const 프레임마다실행할것 = () => {
     // 필요없어진 장애물 제거
     // x좌표가 0미만이면 제거
     if (a.x < 0) {
-      //
+      // o가 배열
       o.splice(i, 1);
     }
 
@@ -72,7 +73,33 @@ const 프레임마다실행할것 = () => {
     a.draw();
   });
 
+  if (점프중 == true) {
+    dino.y--;
+    점프timer++;
+  }
+
+  if (점프중 == false) {
+    // 점프 눌렀을때의 y높이를 정해두고 그 이상으로 ++금지
+    if (dino.y < 200) {
+      dino.y++;
+    }
+  }
+
+  // 100프레임 지나면 dino.y-- 점프 중지
+  if (점프timer > 100) {
+    점프중 = false;
+    점프timer = 0;
+  }
+
   dino.draw();
 };
 
 프레임마다실행할것();
+
+// 스페이스바 누르면 점프
+var 점프중 = false;
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") {
+    점프중 = true;
+  }
+});
