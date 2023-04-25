@@ -60,7 +60,14 @@ const 프레임마다실행할것 = () => {
     const cactus = new Cactus();
     cacus여러개.push(cactus);
   }
-  cacus여러개.forEach((a) => {
+  cacus여러개.forEach((a, i, o) => {
+    // 필요없어진 장애물 제거
+    // x좌표가 0미만이면 제거
+    if (a.x < 0) {
+      //
+      o.splice(i, 1);
+    }
+
     a.x--;
     a.draw();
   });
