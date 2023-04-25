@@ -46,9 +46,10 @@ cactus.draw();
 let timer = 0;
 let cacus여러개 = [];
 let 점프timer = 0;
+var animation;
 
 const 프레임마다실행할것 = () => {
-  requestAnimationFrame(프레임마다실행할것);
+  animation = requestAnimationFrame(프레임마다실행할것);
   timer++;
   // 기존에 남아있는 이미지를 초기화시켜서 이동하는것을 보여줌
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -56,7 +57,7 @@ const 프레임마다실행할것 = () => {
   // 캐릭터는 가만히 있고, 장애물들이 다가오도록 만들기
   // 2~3초에 한번씩 보여주도록 하기
   // 게임은 항상 프레임으로 움직인다.
-  if (timer % 120 === 0) {
+  if (timer % 200 === 0) {
     // 장애물을 여러개 관리하려면 배열에 추가하기
     const cactus = new Cactus();
     cacus여러개.push(cactus);
@@ -70,6 +71,8 @@ const 프레임마다실행할것 = () => {
     }
 
     a.x--;
+    // 캐릭터와 모든 장애물 충돌체크하기 위해 forEach에 넣기
+    충돌여부(dino, a);
     a.draw();
   });
 
@@ -93,8 +96,17 @@ const 프레임마다실행할것 = () => {
 
   dino.draw();
 };
-
 프레임마다실행할것();
+
+// 충돌체크하기
+const 충돌여부 = (dino, cactus) => {
+  var x축차이 = cactus.x - (dino.x + dino.width);
+  var y축차이 = cactus.y - (dino.y + dino.height);
+  if (x축차이 < 0 && y축차이 < 0) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    cancelAnimationFrame(animation);
+  }
+};
 
 // 스페이스바 누르면 점프
 var 점프중 = false;
